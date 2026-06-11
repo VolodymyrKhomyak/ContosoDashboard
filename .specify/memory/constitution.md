@@ -1,50 +1,76 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- Sync Impact Report: Version 1.0.0 (initial) | Added 3 core principles, technical constraints, security governance, stakeholder-driven amendment process. Templates requiring updates: plan-template.md ✅, spec-template.md ✅, tasks-template.md ✅. -->
+
+# Contoso Dashboard Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. User-Centric Design
+Every feature must prioritize user experience, accessibility, and simplicity. Teams MUST validate designs with stakeholders before implementation. Features MUST be intuitive and minimize cognitive load. Rationale: Contoso Dashboard serves diverse users across teams; poor UX reduces adoption and productivity.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Data Security First
+Security is non-negotiable and embedded in every layer. All sensitive data MUST be encrypted at rest and in transit. Authentication and authorization MUST use role-based access control (RBAC). PII handling MUST comply with data protection standards. Audit logging MUST capture all data access and modifications. Rationale: Dashboard manages sensitive project and team data; compliance and trust are critical.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Maintainability & Clean Code
+Code MUST be readable, well-documented, and follow SOLID principles. Architectural decisions MUST be justified and documented. Technical debt MUST be tracked and addressed proactively. Rationale: Long-term team productivity and onboarding efficiency depend on code clarity.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+## Technical & Architectural Constraints
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+- **Runtime**: .NET 10 / C# only
+- **Frontend**: Single-page Razor Components (Blazor WASM/Server-side as appropriate)
+- **Data Access**: Entity Framework Core with SQL Server
+- **Authentication**: Azure AD integration mandatory
+- **API Communication**: Structured JSON for client-server messaging
+- **Database**: SQL Server; schema migrations MUST be version-controlled
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Quality & Testing Requirements
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+**Testing Strategy**: Balanced approach—core business logic and data operations MUST use Test-Driven Development (TDD); supportive features (UI utilities, helpers) use standard post-development testing.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Core Features Requiring TDD**:
+- Data models and business logic (Projects, Tasks, Users, Notifications)
+- Authentication and authorization workflows
+- Critical workflows (project creation, task assignment, team management)
+- Data access layer (EF Core queries and migrations)
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+**Standard Testing**:
+- UI component interactions (Razor Components)
+- Notification service edge cases
+- Localization and internationalization features
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+## Security & Data Governance
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+**Data Protection**:
+- Encryption MUST be enforced for data in transit (TLS 1.2+) and at rest (SQL Server Transparent Data Encryption)
+- API endpoints MUST validate and sanitize all inputs
+- No sensitive data (passwords, PII) MUST be logged or cached unencrypted
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Access Control**:
+- RBAC MUST be implemented for all features (Admin, Manager, Team Member, Viewer roles minimum)
+- MUST enforce principle of least privilege
+- Session timeouts MUST be configured based on risk level
+
+**Audit & Compliance**:
+- All data modifications MUST be logged with timestamp, user ID, and change details
+- PII access MUST be tracked separately and reviewed quarterly
+- Compliance violations MUST trigger alerts
+
+## Governance & Amendment Process
+
+**Decision-Making Authority**: Stakeholder-Driven
+- Business stakeholders (Product Owner, Team Leads) and Technical Lead guide all constitution amendments
+- Technical decisions affecting architecture require consensus
+- Security and compliance decisions are final and non-negotiable
+
+**Amendment Procedure**:
+- All constitution amendments MUST be proposed in writing with rationale
+- Changes requiring stakeholder review MUST be documented in a GitHub issue
+- Amendments take effect immediately upon merge; version bumped per semantic versioning
+- MAJOR: Principle removal or redefinition
+- MINOR: New principle or expanded guidance
+- PATCH: Clarifications, wording, non-semantic refinements
+
+**Compliance Review**: Quarterly review of all PRs/specs against constitution. Violations MUST be addressed before merge.
+
+---
+
+**Version**: 1.0.0 | **Ratified**: 2026-06-11 | **Last Amended**: 2026-06-11
