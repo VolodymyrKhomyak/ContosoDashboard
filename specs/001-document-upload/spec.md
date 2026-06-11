@@ -5,6 +5,13 @@
 **Status**: Draft  
 **Input**: Stakeholder requirements: Document Upload and Management Feature
 
+## Clarifications
+
+### Session 2026-06-11
+
+- Q: How should virus/malware scanning work if the feature must remain offline for training? → A: Skip virus scanning for training; treat as production enhancement during Azure migration
+- Q: What accessibility standard should the feature target? → A: WCAG 2.1 Level AA (enterprise standard with keyboard navigation, screen reader support, 4.5:1 contrast)
+
 ## User Scenarios & Testing
 
 ### User Story 1 - Upload and Store Work Documents (Priority: P1)
@@ -192,31 +199,31 @@ Administrators need to see who uploaded, downloaded, deleted, or shared document
 - **FR-005**: System MUST require users to provide a document title and select a category when uploading
 - **FR-006**: System MUST allow users to optionally provide: description, associated project, and custom tags
 - **FR-007**: System MUST automatically capture and store: upload date/time, uploader username, file size, and MIME type
-- **FR-008**: System MUST scan uploaded files for viruses and malware before storage and reject infected files
-- **FR-009**: System MUST store uploaded files securely outside web-accessible directories with unique GUID-based filenames
-- **FR-010**: System MUST enforce whitelist validation on file extensions before saving to disk
-- **FR-011**: System MUST allow users to view a list of all documents they have uploaded with columns: title, category, upload date, file size, associated project
-- **FR-012**: System MUST allow sorting documents by: title, upload date, category, file size
-- **FR-013**: System MUST allow filtering documents by: category, associated project, upload date range
-- **FR-014**: System MUST provide a search function to find documents by title, description, tags, uploader name, or associated project
-- **FR-015**: System MUST return search results within 2 seconds
-- **FR-016**: System MUST enforce authorization checks so users only see documents they have permission to access
-- **FR-017**: System MUST allow users to download any document they have access to
-- **FR-018**: System MUST provide browser preview capability for PDF and image files without downloading
-- **FR-019**: System MUST allow document owners to edit document metadata (title, description, category, tags)
-- **FR-020**: System MUST allow document owners to replace a document file with an updated version
-- **FR-021**: System MUST allow document owners to delete documents they uploaded (after confirmation)
-- **FR-022**: System MUST allow Project Managers to delete any document in their projects
-- **FR-023**: System MUST allow document owners to share documents with specific users or teams
-- **FR-024**: System MUST send in-app notifications when someone shares a document with a user
-- **FR-025**: System MUST display shared documents in recipients' "Shared with Me" section
-- **FR-026**: System MUST allow users to upload documents directly from a task detail page
-- **FR-027**: Documents uploaded from a task MUST be automatically associated with the task's project
-- **FR-028**: System MUST display a "Recent Documents" widget on the dashboard home page showing the last 5 documents uploaded by the user
-- **FR-029**: System MUST log all document activities (uploads, downloads, deletions, shares) for audit purposes
-- **FR-030**: System MUST allow administrators to generate reports showing most uploaded document types, most active uploaders, and document access patterns
-- **FR-031**: System MUST work offline without requiring cloud services or internet connectivity
-- **FR-032**: System MUST persist files to local filesystem storage for training purposes
+- **FR-008**: System MUST store uploaded files securely outside web-accessible directories with unique GUID-based filenames
+- **FR-009**: System MUST enforce whitelist validation on file extensions before saving to disk
+- **FR-010**: System MUST allow users to view a list of all documents they have uploaded with columns: title, category, upload date, file size, associated project
+- **FR-011**: System MUST allow sorting documents by: title, upload date, category, file size
+- **FR-012**: System MUST allow filtering documents by: category, associated project, upload date range
+- **FR-013**: System MUST provide a search function to find documents by title, description, tags, uploader name, or associated project
+- **FR-014**: System MUST return search results within 2 seconds
+- **FR-015**: System MUST enforce authorization checks so users only see documents they have permission to access
+- **FR-016**: System MUST allow users to download any document they have access to
+- **FR-017**: System MUST provide browser preview capability for PDF and image files without downloading
+- **FR-018**: System MUST allow document owners to edit document metadata (title, description, category, tags)
+- **FR-019**: System MUST allow document owners to replace a document file with an updated version
+- **FR-020**: System MUST allow document owners to delete documents they uploaded (after confirmation)
+- **FR-021**: System MUST allow Project Managers to delete any document in their projects
+- **FR-022**: System MUST allow document owners to share documents with specific users or teams
+- **FR-023**: System MUST send in-app notifications when someone shares a document with a user
+- **FR-024**: System MUST display shared documents in recipients' "Shared with Me" section
+- **FR-025**: System MUST allow users to upload documents directly from a task detail page
+- **FR-026**: Documents uploaded from a task MUST be automatically associated with the task's project
+- **FR-027**: System MUST display a "Recent Documents" widget on the dashboard home page showing the last 5 documents uploaded by the user
+- **FR-028**: System MUST log all document activities (uploads, downloads, deletions, shares) for audit purposes
+- **FR-029**: System MUST allow administrators to generate reports showing most uploaded document types, most active uploaders, and document access patterns
+- **FR-030**: System MUST work offline without requiring cloud services or internet connectivity
+- **FR-031**: System MUST persist files to local filesystem storage for training purposes
+- **FR-032**: System user interface MUST meet WCAG 2.1 Level AA accessibility standards including keyboard navigation, screen reader compatibility, and color contrast ratios (4.5:1 for normal text)
 
 ### Key Entities
 
@@ -238,6 +245,7 @@ Administrators need to see who uploaded, downloaded, deleted, or shared document
 - **SC-006**: Document list pages load within 2 seconds for users with up to 500 documents
 - **SC-007**: Users can complete a document upload in 3 or fewer clicks after file selection
 - **SC-008**: 95% of users successfully upload and retrieve their first document without requiring help
+- **SC-009**: User interface meets WCAG 2.1 Level AA accessibility compliance verified through automated and manual testing
 
 ### Business Outcomes
 
@@ -260,6 +268,7 @@ Administrators need to see who uploaded, downloaded, deleted, or shared document
 
 The following features are NOT included in this initial release:
 
+- **Virus/malware scanning** (deferred to production; will be implemented during Azure cloud migration using cloud-based scanning services)
 - Real-time collaborative editing of documents
 - Version history and rollback capabilities (users must re-upload to replace)
 - Advanced document workflows (approval processes, document routing)
